@@ -1,25 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Header from './components/Header';
+import Question from './components/Question';
+import Field from './components/Field';
+import BackgroundContainer from './components/BackgroundContainer';
+import BeginContainer from './components/BeginContainer';
+import { RootState, useAppSelector } from './redux/store';
+import FinishContainer from './components/FinishContainer';
 
-function App() {
+const App = () => {
+  const gameStatus = useAppSelector((state: RootState) => state.statistics.gameStatus)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className='container'> 
+        {gameStatus === 'unstarted' && <BeginContainer/>}
+        {gameStatus === 'started' && 
+          <>
+            <BackgroundContainer/>
+            <Header/>
+            <Question/>
+            <Field/>
+          </>
+        }
+        {gameStatus === 'finish' && <FinishContainer/>}
+      </div>
+    </>
   );
 }
 
