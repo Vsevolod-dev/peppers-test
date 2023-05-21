@@ -1,7 +1,6 @@
 import { FC, useRef } from 'react'
 import cn from "classnames"
-import { useSelector } from 'react-redux';
-import { RootState } from '../redux/store';
+import { RootState, useAppSelector } from '../redux/store';
 import { useEffect, useState } from 'react';
 import { statisticsSliceActions } from '../redux/slices/statisticsSlice';
 import { getRandomAnswer, getRandomInt } from '../utils';
@@ -18,11 +17,13 @@ interface Item {
 
 const Field: FC = () => {
     const [items, setItems] = useState<Item[]>()
-    const {answer, itemsCount, questionAnimation} = useSelector((state: RootState) => state.question)
-    const {level, scores, bonus, timer} = useSelector((state: RootState) => state.statistics)
+    const {answer, itemsCount, questionAnimation} = useAppSelector((state: RootState) => state.question)
+    const level = useAppSelector((state: RootState) => state.statistics.level)
+    const scores = useAppSelector((state: RootState) => state.statistics.scores)
+    const bonus = useAppSelector((state: RootState) => state.statistics.bonus)
     const questionRef = useRef<HTMLDivElement>(null)
     
-    const {increaseLevel, decreaseLevel, setScores, increaseBonus, decreaseBonus, setGameStatus, increaseAnswersCount, increaseCorrectAnswersCount} = useActionCreators(statisticsSliceActions)
+    const {increaseLevel, decreaseLevel, setScores, increaseBonus, decreaseBonus, increaseAnswersCount, increaseCorrectAnswersCount} = useActionCreators(statisticsSliceActions)
     const {setAnswerAnimation, setQuestionAnimation, rerenderAnswer, setItemsCount} = useActionCreators(questionSliceActions)
   
     useEffect( () => {
@@ -64,7 +65,7 @@ const Field: FC = () => {
         questionRef.current?.classList.add(questionAnimation)
       }
     }, [questionAnimation])
-
+console.log('render');
     const answerHandler = (value: number) => {
       setAnswerAnimation('ng-leave')
       setQuestionAnimation('ng-leave')
@@ -86,11 +87,6 @@ const Field: FC = () => {
           decreaseBonus()
           rerenderAnswer(level - 1)
           setItemsCount(level - 1)
-        }
-
-        if (timer === 0) {
-          setGameStatus('finish')
-          console.log('game stopped');
         }
       }, 300)
     }

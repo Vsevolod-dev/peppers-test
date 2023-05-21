@@ -1,9 +1,8 @@
 import { FC, useEffect, useRef } from 'react'
-import { useSelector } from 'react-redux'
-import { RootState } from '../redux/store'
+import { RootState, useAppSelector } from '../redux/store'
 
 const Question: FC = () => {
-  const {answer, answerAnimation} = useSelector((state: RootState) => state.question)
+  const {answer, answerAnimation} = useAppSelector((state: RootState) => state.question)
   const answerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {

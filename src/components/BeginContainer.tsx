@@ -18,10 +18,10 @@ const BeginContainer = () => {
         } else {
             dispatch(statisticsSliceActions.setGameStatus('started'))
         }
-    }, [number])
+    }, [dispatch, number])
 
   return (
-    <div className={cn('container-background', 'container-background--unstarted')} style={{backgroundColor: '#1d4a5d'}}>
+    <div className={cn('container-background', 'container-background--unstarted')}>
         <div className='unstarted-timer'>{number}</div>
     </div>
   )

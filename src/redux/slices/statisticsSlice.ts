@@ -11,7 +11,7 @@ interface Statistics {
 }
 
 const initialState: Statistics = {
-    timer: 5,
+    timer: 60,
     level: 1,
     scores: 0,
     bonus: 1,
@@ -28,7 +28,7 @@ export const statisticsSlice = createSlice({
             state.level += 1
         },
         decreaseLevel(state) {
-            state.level -= 1
+            if (state.level !== 1) state.level -= 1
         },
         increaseBonus(state) {
             if (state.bonus < 5) state.bonus += 1

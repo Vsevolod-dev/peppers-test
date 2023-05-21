@@ -1,11 +1,10 @@
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
 import { useActionCreators } from '../../hooks/useActionCreators'
-import { RootState } from '../../redux/store'
+import { RootState, useAppSelector } from '../../redux/store'
 import { statisticsSliceActions } from '../../redux/slices/statisticsSlice'
 
 const Timer = () => {
-    const timer = useSelector((state: RootState) => state.statistics.timer)
+    const timer = useAppSelector((state: RootState) => state.statistics.timer)
     const {setTimer} = useActionCreators(statisticsSliceActions)
 
     useEffect(() => {
@@ -18,7 +17,7 @@ const Timer = () => {
         }
 
         return () => clearInterval(interval)
-    }, [timer])
+    }, [setTimer, timer])
 
   return (
     <div className="header__block">

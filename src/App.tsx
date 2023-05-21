@@ -1,4 +1,4 @@
-import './App.css';
+import './styles/App.scss';
 import Header from './components/Header';
 import Question from './components/Question';
 import Field from './components/Field';

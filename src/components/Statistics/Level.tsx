@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux"
-import { RootState } from "../../redux/store"
+import { RootState, useAppSelector } from "../../redux/store"
 
 
 const Level = () => {
-  const level = useSelector((state: RootState) => state.statistics.level)
+  const level = useAppSelector((state: RootState) => state.statistics.level)
 
   return (
     <div className="header__block">
