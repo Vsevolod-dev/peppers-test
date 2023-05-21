@@ -1,0 +1,23 @@
+.header {
+    max-width: 445px;
+    min-width: 288px;
+    display: flex;
+    height: 64px;
+    margin-left: auto;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    text-align: center;
+    background-color: hsla(0,0%,100%,.4);
+}
+
+.text {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.value {
+    font-size: 16px;
+    font-weight: 900;
+}

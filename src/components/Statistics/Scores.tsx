@@ -1,15 +1,16 @@
 import { RootState, useAppSelector } from '../../redux/store'
+import styles from '../../styles/Header.module.scss'
 
 const Scores = () => {
     const scores = useAppSelector((state: RootState) => state.statistics.scores)
 
     return (
-        <div className="header__block">
-            <div className="block__text">
-            Очки
+        <div>
+            <div className={styles.text}>
+                Очки
             </div>
-            <div className="block__index">
-            {scores}
+            <div className={styles.value}>
+                {scores}
             </div>
         </div>
     )

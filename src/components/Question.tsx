@@ -1,5 +1,6 @@
 import { FC, useEffect, useRef } from 'react'
 import { RootState, useAppSelector } from '../redux/store'
+import styles from '../styles/Question.module.scss'
 
 const Question: FC = () => {
   const {answer, answerAnimation} = useAppSelector((state: RootState) => state.question)
@@ -13,9 +14,9 @@ const Question: FC = () => {
   }, [answerAnimation])
 
   return (
-    <div className="question">
-          <div className="question__text">Найдите указанное число:</div>
-          <div ref={answerRef} className="question__number">{answer}</div>
+    <div className={styles.question}>
+          <div className={styles.text}>Найдите указанное число:</div>
+          <div ref={answerRef} className={styles.number}>{answer}</div>
     </div>
   )
 }

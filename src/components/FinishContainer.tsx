@@ -1,4 +1,5 @@
 import { RootState, useAppSelector } from '../redux/store'
+import styles from '../styles/Results.module.scss'
 
 const FinishContainer = () => {
     const {scores, answersCount, correctAnswersCount} = useAppSelector((state: RootState) => state.statistics)
@@ -6,12 +7,12 @@ const FinishContainer = () => {
     return (
         <div>
             <div className='container-background container-background--results'></div>
-            <div className='results'>
-                <div className="results_images">
+            <div className={styles.results}>
+                <div className={styles.images}>
                         <h3>Ваши результаты</h3>
                 </div>
-                <div className='results_content'>
-                    <table className='results_table'>
+                <div className={styles.content}>
+                    <table className={styles.table}>
                         <tbody>
                             <tr>
                                 <td>Текущий результат</td>

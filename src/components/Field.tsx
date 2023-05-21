@@ -2,7 +2,7 @@ import { FC, useRef } from 'react'
 import cn from "classnames"
 import { RootState, useAppSelector } from '../redux/store';
 import { useEffect, useState } from 'react';
-import { statisticsSliceActions } from '../redux/slices/statisticsSlice';
+import { bonusSelector, levelSelector, scoresSelector, statisticsSliceActions } from '../redux/slices/statisticsSlice';
 import { getRandomAnswer, getRandomInt } from '../utils';
 import { useActionCreators } from '../hooks/useActionCreators';
 import { questionSliceActions } from '../redux/slices/questionSlice';
@@ -18,12 +18,12 @@ interface Item {
 const Field: FC = () => {
     const [items, setItems] = useState<Item[]>()
     const {answer, itemsCount, questionAnimation} = useAppSelector((state: RootState) => state.question)
-    const level = useAppSelector((state: RootState) => state.statistics.level)
-    const scores = useAppSelector((state: RootState) => state.statistics.scores)
-    const bonus = useAppSelector((state: RootState) => state.statistics.bonus)
+    const level = useAppSelector(levelSelector)
+    const scores = useAppSelector(scoresSelector)
+    const bonus = useAppSelector(bonusSelector)
     const questionRef = useRef<HTMLDivElement>(null)
     
-    const {increaseLevel, decreaseLevel, setScores, increaseBonus, decreaseBonus, increaseAnswersCount, increaseCorrectAnswersCount} = useActionCreators(statisticsSliceActions)
+    const {increaseLevel, decreaseLevel, setScores, increaseBonus, decreaseBonus, increaseAnswersCount, increaseCorrectAnswersCount, checkTimer} = useActionCreators(statisticsSliceActions)
     const {setAnswerAnimation, setQuestionAnimation, rerenderAnswer, setItemsCount} = useActionCreators(questionSliceActions)
   
     useEffect( () => {
@@ -65,7 +65,7 @@ const Field: FC = () => {
         questionRef.current?.classList.add(questionAnimation)
       }
     }, [questionAnimation])
-console.log('render');
+
     const answerHandler = (value: number) => {
       setAnswerAnimation('ng-leave')
       setQuestionAnimation('ng-leave')
@@ -88,6 +88,8 @@ console.log('render');
           rerenderAnswer(level - 1)
           setItemsCount(level - 1)
         }
+
+        checkTimer()
       }, 300)
     }
 

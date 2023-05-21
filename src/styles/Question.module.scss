@@ -1,0 +1,22 @@
+
+.question {
+    margin: 30px auto;
+    max-width: 485px;
+    padding: 1.5em 1.2em;
+    border-radius: 3px;
+    color: #fff;
+    box-shadow: 0 7px 35px 0 rgba(0,0,0,.3);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.text {
+    font-size: 1.15em;
+    font-weight: 600;
+}
+
+.number {
+    font-size: 3.15em;
+    font-weight: 600;
+}

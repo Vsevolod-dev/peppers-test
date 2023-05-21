@@ -1,4 +1,5 @@
 import {PayloadAction, createSlice} from '@reduxjs/toolkit';
+import { RootState } from '../store';
 
 interface Statistics {
     timer: number
@@ -50,6 +51,9 @@ export const statisticsSlice = createSlice({
         },
         increaseCorrectAnswersCount(state) {
             state.correctAnswersCount += 1
+        },
+        checkTimer(state) {
+            if (state.timer === 0) state.gameStatus = 'finish'
         }
     },
 })
@@ -57,5 +61,8 @@ export const statisticsSlice = createSlice({
 // export const {increaseLevel, increaseBonus, decreaseBonus, setScores} = statisticsSlice.actions
 
 // export const statisticsSliceReducer = statisticsSlice.reducer
+export const levelSelector = (state: RootState )=> state.statistics.level
+export const scoresSelector = (state: RootState )=> state.statistics.scores
+export const bonusSelector = (state: RootState )=> state.statistics.bonus
 
 export const {reducer: statisticsSliceReducer, actions: statisticsSliceActions} = statisticsSlice

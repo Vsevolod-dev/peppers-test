@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useActionCreators } from '../../hooks/useActionCreators'
 import { RootState, useAppSelector } from '../../redux/store'
 import { statisticsSliceActions } from '../../redux/slices/statisticsSlice'
+import styles from '../../styles/Header.module.scss'
 
 const Timer = () => {
     const timer = useAppSelector((state: RootState) => state.statistics.timer)
@@ -20,12 +21,12 @@ const Timer = () => {
     }, [setTimer, timer])
 
   return (
-    <div className="header__block">
-        <div className="block__text">
-        Время
+    <div>
+        <div className={styles.text}>
+          Время
         </div>
-        <div className="block__index">
-        {timer}
+        <div className={styles.value}>
+          {timer}
         </div>
     </div>
   )
